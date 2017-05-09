@@ -123,7 +123,7 @@ module.exports = class Context
       match[1]
     else if match = /^"(.*)"$/.exec(key) # Double quoted strings
       match[1]
-    else if match = /^(\d+)$/.exec(key) # Integer and floats
+    else if match = /^(-?\d+)$/.exec(key) # Integer and floats
       Number(match[1])
     else if match = /^\((\S+)\.\.(\S+)\)$/.exec(key) # Ranges
       lo = @resolve(match[1])
@@ -135,7 +135,7 @@ module.exports = class Context
         return [] if isNaN(lo) or isNaN(hi)
         new Liquid.Range(lo, hi + 1)
 
-    else if match = /^(\d[\d\.]+)$/.exec(key) # Floats
+    else if match = /^(-?\d[\d\.]+)$/.exec(key) # Floats
       Number(match[1])
     else
       @variable(key)
